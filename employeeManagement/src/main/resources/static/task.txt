@@ -1,0 +1,38 @@
+employee - department -> n:m (bidirectional)
+owning side - employee
+3
+
+employee - organization -> m:1 (bidirectional)
+owning side - employee
+1
+
+employee - project -> n:m (bidirectional)
+owning side - employee
+2
+
+department - organization -> m:1 (bidirectional)
+owning side - department
+
+
+organization - project -> 1:m (unidirectional)
+1 ( one to many)
+
+
+employee dto - departments, projects, organization
+
+department dto - organization
+
+project dto - organization, employee
+
+organization dto - no relationship update
+
+
+
+Schema -
+employee - 3 (owning)
+department - 2 ( 1 owning )
+project -  1 inverse
+organization - 2 inverse, 1 uni owning
+
+
+Transient

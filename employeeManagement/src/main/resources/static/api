@@ -1,0 +1,37 @@
+Employee APIs:
+GET /employees → Returns a list of employees of a particular organization without related entities. Done
+GET /employees/{id} → Returns a single employee with related departments, projects, and organization. Done (just
+recursive fetching issue) - resolved using DTO
+POST /employees → Creates employees with departments, projects and organization. Done
+PUT /employees/{id} → Updates employee information only, not relationships. Done
+PATCH /employees/{id}/department → Update the departments of an employee. Done
+DELETE /employees/{id} → Delete Employee Done
+
+Department APIs:
+GET /departments → Returns a list of departments of a particular organization, along with the count of employees in it.
+ (without related entities) Done
+GET /departments/{id} → Returns a department with its employees. (employee should not have related entities) Done (only
+fetching issue) - Done using DTO
+POST /departments → Creates a department in an organization (only with the department information not employees) Done
+PUT /departments → Updates department information only, not relationships. Done
+PATCH /departments/{id}/employees → Adds/removes employees in a department. Done
+DELETE /departments/{id} → Deletes the department Done
+
+Project APIs:
+GET /projects → Returns a list of projects of a particular organization, along with the count of employees. (without
+related entities) Done
+GET /projects/{id} → Returns a project with all associated employees. (employee should not have related entities)  Done
+( issue with json infinite recursive loop) - done with DTO
+POST /projects → Creates a project in an organization (allow adding employees while creating a project) Done
+PUT /projects/{id} → Updates project information only, not relationships. Done
+PATCH /projects/{id}/employees → Adds/removes employees from a project. Done
+DELETE /projects/{id} → Deletes a project Done
+
+Organization APIs:
+GET /organizations → Returns a list of organizations with employee count, department count and project count (without
+related entities) Done
+GET /organizations/{id} → Returns an organization with list of department names and project names Done (just that
+fetching issue ) - Done
+POST /organizations → Create an organization (without related entities) Done
+PUT /organizations/{id} → Update organization information only (without related entities) Done
+DELETE /organizations/{id} → Deletes an organization and deletes all employees and departments. Done
