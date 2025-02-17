@@ -4,9 +4,6 @@ import com.organization.employeeManagement.dto.EmployeeListUpdateDTO;
 import com.organization.employeeManagement.dto.ProjectDTO;
 import com.organization.employeeManagement.dto.ProjectFetchDTO;
 import com.organization.employeeManagement.dto.ProjectUpdateDTO;
-import com.organization.employeeManagement.entities.Employee;
-import com.organization.employeeManagement.entities.Project;
-import com.organization.employeeManagement.exception.RecordDoesNotExist;
 import com.organization.employeeManagement.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -14,9 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @RestController

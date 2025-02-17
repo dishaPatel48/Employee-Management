@@ -1,16 +1,13 @@
 package com.organization.employeeManagement.controller;
 
 import com.organization.employeeManagement.dto.*;
-import com.organization.employeeManagement.entities.Department;
-import com.organization.employeeManagement.entities.Employee;
-import com.organization.employeeManagement.exception.RecordDoesNotExist;
 import com.organization.employeeManagement.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @RestController
