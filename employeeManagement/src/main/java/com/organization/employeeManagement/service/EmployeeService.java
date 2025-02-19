@@ -75,6 +75,11 @@ public class EmployeeService {
 
     @Transactional
     public void addEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = getEmployee(employeeDTO);
+        employeeRepository.save(employee);
+    }
+
+    public Employee getEmployee(EmployeeDTO employeeDTO) {
         if (employeeDTO.getName() == null || employeeDTO.getDepartments() == null || employeeDTO.getOrganization() == null) {
             throw new IncompleteInformation("Enter All the fields");
         }
@@ -94,9 +99,7 @@ public class EmployeeService {
             List<Project> projects = projectService.getProjectsByIds(employeeDTO.getProjects());
             employee.setProjects(projects);
         }
-
-        employeeRepository.save(employee);
-
+        return employee;
     }
 
     public void updateEmployee(EmployeeDTO employeeDTO, int id) {

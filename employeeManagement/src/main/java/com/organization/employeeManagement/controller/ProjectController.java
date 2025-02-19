@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -33,12 +34,14 @@ public class ProjectController {
         return ResponseEntity.ok(project);
     }
 
+    @Secured({"ROLE_MANAGER", "ROLE_FOUNDER"})
     @PostMapping()
     public ResponseEntity<Void> addProject(@RequestBody ProjectDTO projectDTO) {
         projectService.addProject(projectDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
+    @Secured("ROLE_MANAGER")
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateProject(@PathVariable("id") int id,
                                               @RequestBody ProjectUpdateDTO projectUpdateDTO) {
@@ -46,6 +49,7 @@ public class ProjectController {
         return ResponseEntity.ok().build();
     }
 
+    @Secured("ROLE_MANAGER")
     @PatchMapping("/{id}/employees")
     public ResponseEntity<Void> updateProjectEmployees(@PathVariable("id") int id,
                                                        @RequestBody EmployeeListUpdateDTO updateDTO) {
@@ -53,6 +57,7 @@ public class ProjectController {
         return ResponseEntity.ok().build();
     }
 
+    @Secured("ROLE_MANAGER")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable("id") int id) {
         projectService.deleteProject(id);

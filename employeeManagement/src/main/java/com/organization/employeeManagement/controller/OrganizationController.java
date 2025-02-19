@@ -7,6 +7,7 @@ import com.organization.employeeManagement.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class OrganizationController {
     @Autowired
     private OrganizationService organizationService;
 
+    @Secured({"ROLE_FOUNDER", "ROLE_MANAGER"})
     @GetMapping()
     public ResponseEntity<List<OrganizationObjDTO>> getOrganizations() {
         List<OrganizationObjDTO> organizations = organizationService.getOrganizations();
@@ -30,22 +32,25 @@ public class OrganizationController {
         return ResponseEntity.ok(organization);
     }
 
+    @Secured("ROLE_FOUNDER")
     @PostMapping()
     public ResponseEntity<Void> addOrganization(@RequestBody OrganizationDTO dto) {
         organizationService.addOrganization(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
+    @Secured("ROLE_FOUNDER")
     @PutMapping()
     public ResponseEntity<Void> updateOrganization(@RequestBody OrganizationDTO dto, Integer id) {
         organizationService.updateOrganization(dto, id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(null);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
     }
 
+    @Secured("ROLE_FOUNDER")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOrganization(@PathVariable Integer id) {
         organizationService.deleteOrganization(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(null);
+        return ResponseEntity.ok(null);
     }
 
 

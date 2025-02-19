@@ -1,0 +1,41 @@
+name: organization_management
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: DockerFile
+    container_name: app
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://org_db:5432/Organization2
+      SPRING_DATASOURCE_USERNAME: disha
+      SPRING_DATASOURCE_PASSWORD: disha
+    depends_on:
+      - org_db
+    networks:
+      - org-net
+
+  org_db:
+    image: postgres:17
+    container_name: org_db
+    environment:
+      POSTGRES_USER: disha
+      POSTGRES_PASSWORD: disha
+      POSTGRES_DB: Organization2
+    ports:
+      - "5432:5432"
+    volumes:
+      - database2:/var/lib/postgresql/data
+    networks:
+      - org-net
+    restart: always
+
+volumes:
+  database2:
+
+networks:
+  org-net:

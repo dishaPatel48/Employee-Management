@@ -8,6 +8,7 @@ import com.organization.employeeManagement.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class EmployeeController {
         return ResponseEntity.ok(employee);
     }
 
+    @Secured({"ROLE_FOUNDER", "ROLE_MANAGER"})
     @PostMapping()
     public ResponseEntity<Void> addEmployees(@RequestBody EmployeeDTO employeeDTO) {
         employeeService.addEmployee(employeeDTO);
@@ -49,12 +51,14 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
+    @Secured("ROLE_MANAGER")
     @PatchMapping("/{id}/department")
     public ResponseEntity<Void> updateDepartment(@RequestBody DepartmentRefDTO dto, @PathVariable Integer id) {
         employeeService.updateDepartment(dto, id);
         return ResponseEntity.ok(null);
     }
 
+    @Secured({"ROLE_FOUNDER", "ROLE_MANAGER"})
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployeeById(@PathVariable int id) {
         employeeService.deleteEmployee(id);
